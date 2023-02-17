@@ -3,7 +3,7 @@
 # "hello" object in the server.
 #
 Printer.Proxy=SimplePrinter:tcp -p 9099
-
+Callback.Client.Endpoints=default -h localhost
 #
 # Uncomment to use the WebSocket transports instead.
 #
@@ -12,4 +12,4 @@ Printer.Proxy=SimplePrinter:tcp -p 9099
 
 # Only listen on the ZeroTier's LIASOn1 interface by default.
 #
-Ice.Default.Host=10.147.19.106
+Ice.Default.Host=localhost

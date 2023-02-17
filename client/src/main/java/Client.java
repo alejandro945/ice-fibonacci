@@ -13,15 +13,13 @@ public class Client {
 
     public static void main(String[] args) {
         java.util.List<String> extraArgs = new java.util.ArrayList<>();
-        try (com.zeroc.Ice.Communicator communicator = com.zeroc.Ice.Util.initialize(args, "config.client",
-                extraArgs)) {
-            Demo.CallbackSenderPrx server = serverConfiguration();
-            Demo.CallbackReceiverPrx client = clientConfiguration();
-            if (server == null || client == null)
-                throw new Error("Invalid proxy");
-            runProgram(server, client);
-            communicator.shutdown();
-        }
+        communicator = com.zeroc.Ice.Util.initialize(args, "config.client", extraArgs);
+        Demo.CallbackSenderPrx server = serverConfiguration();
+        Demo.CallbackReceiverPrx client = clientConfiguration();
+        if (server == null || client == null)
+            throw new Error("Invalid proxy");
+        runProgram(server, client);
+        communicator.shutdown();
     }
 
     /**
@@ -31,11 +29,14 @@ public class Client {
      */
     public static void runProgram(CallbackSenderPrx server, CallbackReceiverPrx client) {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String hostname = communicator.getProperties().getProperty("Ice.Default.Host");
         try {
+            System.out.print("Welcome please type a number 🫰: ");
             String message = br.readLine();
             while (!message.equalsIgnoreCase("exit")) {
-                server.initiateCallback(client, message);
-                message = br.readLine();
+                server.initiateCallback(client, hostname + ":" + message);
+                System.out.print("Enter another number to calculate ⭐️: ");
+                message =  br.readLine();
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -44,23 +45,25 @@ public class Client {
 
     /**
      * Method responsible for client callback creation
+     * 
      * @return
      */
     public static Demo.CallbackReceiverPrx clientConfiguration() {
-        ObjectAdapter adapter = communicator.createObjectAdapter("Callback");
+        ObjectAdapter adapter = communicator.createObjectAdapter("Callback.Client");
         com.zeroc.Ice.Object obj = new CallbackReceiver();
-        ObjectPrx objectPrx = adapter.add(obj, Util.stringToIdentity("callback"));
+        ObjectPrx objectPrx = adapter.add(obj, Util.stringToIdentity("callbackReceiver"));
         adapter.activate();
         return Demo.CallbackReceiverPrx.uncheckedCast(objectPrx);
     }
 
     /**
      * Method responsible for server callback creation
+     * 
      * @return
      */
     public static Demo.CallbackSenderPrx serverConfiguration() {
         Demo.CallbackSenderPrx twoway = Demo.CallbackSenderPrx
-        .checkedCast(communicator.propertyToProxy("Printer.Proxy")).ice_twoway().ice_secure(false);
+                .checkedCast(communicator.propertyToProxy("Printer.Proxy")).ice_twoway().ice_secure(false);
         return twoway.ice_twoway();
     }
 
