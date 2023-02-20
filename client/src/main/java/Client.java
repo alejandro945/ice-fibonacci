@@ -20,6 +20,7 @@ public class Client {
             throw new Error("Invalid proxy");
         runProgram(server, client);
         communicator.shutdown();
+        communicator.destroy();
     }
 
     /**
