@@ -1,3 +1,8 @@
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import com.zeroc.Ice.Current;
 
 import Demo.CallbackReceiverPrx;
@@ -10,21 +15,27 @@ public class CallbackSender implements Demo.CallbackSender {
     }
 
     public String validationLayer(String message) {
-        String response = "";
+        String response = 0 + "";
+        String print = message;
         try {
             int number = Integer.parseInt(message.split(":", 2)[1]);
             if (number > 0) {
-                response = fibonacci(number) + "";
+                List<Integer> seq = fibonacciSequence(number);
+                print = message.split(":", 2)[0] + ":" + seq.toString();
+                response = (number != 1 && number != 2) ? fibonacciValue(seq) + "" : 1 + "";
             }
-        } catch (Exception e) {
-            System.out.println(message + "Error you must send a number");
-            response = 0 + "";
-        }
+        } catch (Exception e) {}
+        System.out.println(print);
         return response;
     }
 
-    public Integer fibonacci(int number) {
-        return (number > 2) ? fibonacci(number - 1) + fibonacci(number - 2) : 1;
+    public List<Integer> fibonacciSequence(int number) {
+        return Stream.iterate(new int[] { 1, 1 }, t -> new int[] { t[1], t[0] + t[1] }).limit(number).map(n -> n[0])
+                .collect(Collectors.toList());
+    }
+
+    public int fibonacciValue(List<Integer> seq) {
+        return seq.subList(seq.size() - 2, seq.size()).stream().mapToInt(Integer::intValue).sum();
     }
 
 }
