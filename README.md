@@ -1,8 +1,8 @@
 # Ice Middleware - Fibonacci Calculator 🎁
 
-Distributed programming to calculate the fibonacci sequence.
+Distributed programming to calculate the fibonacci sequence. The Fibonacci numbers, commonly denoted Fn , form a sequence, the Fibonacci sequence, in which each number is the sum of the two preceding.
 
-## **Build With** 🛠️
+## Build With 🛠️
 
 <div align="left">
     <p>
@@ -12,7 +12,7 @@ Distributed programming to calculate the fibonacci sequence.
     </p>
 </div>
 
-## **Versioned** 📌
+## Versioned 📌
 
 <div align="left">
     <a href="https://git-scm.com/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/2ae2a900d2f041da66e950e4d48052658d850630/icons/git/git-original.svg" height="60" width = "60"></a>
@@ -27,6 +27,13 @@ We're going to use a project with two sub-projects to build the Client and Serve
 ...
 "Class-Path": configurations.runtimeClasspath.resolve().collect { it.toURI() }.join(' ')
 ...
+```
+
+In order for it to be independent of the computer on which it is developed, it should look like this:
+
+```gradle
+...
+"Class-Path": 'opt/Ice-3.7.6/lib/ice-3.7.6.jar'...
 ```
 
 We must also edit the generated settings.gradle to define our sub-projects:
@@ -52,13 +59,62 @@ Callback.Client.Endpoints=default -h localhost
 Ice.Default.Host=localhost
 ```
 
+As an **observation**, if you want to run our product remotely, you must change the resource file that is inside the jar (zip) and you must modify the host by the ip and port where the logical interface of your computer is located. We will place an example of how we do it using zerotier as a logical interface identifying the server on the xhgrid9 pc.
+
+
+### Server
+
+- For your local pc
+
+```properties
+Ice.Default.Host=10.147.19.125
+```
+- For remotes pc
+
+```properties
+Ice.Default.Host=192.168.131.49 # hgrid9.icesi.edu.co (DNS resolves ip)
+```
+### Client
+
+- In your local pc
+
+```properties
+Callback.Client.Endpoints=default -h 10.147.19.218 # Your ip in zerotier logic interface
+Ice.Default.Host=10.147.19.125 # xhgrid9 (DNS resolves ip)
+```
+
+- In remote pc
+
+```properties
+Callback.Client.Endpoints=default -h 192.168.131.51 # Or hotsname specific of the remote client (hgrid11.icesi.edu.co)
+Ice.Default.Host=hgrid9
+```
+
+### Notes 📑
+
+Sending jar files using scp command:
+
+```bash
+scp server.jar swarch@xhgrid9:.
+scp client.jar swarch@xhgrid10:.
+scp client.jar swarch@xhgrid11:.
+```
+
 ## Compiling the client and server ⭐️
 
 ```bash
-./gradlew build
+gradle build
 ```
 
-## Testing our distributed app 🐙
+## Running product remotely 💥
+
+```bash
+java -jar server/build/libs/server.jar 
+java -jar client/build/libs/client.jar 
+```
+![run](./assets/run.png)
+
+## Testing our distributed app local 🐙
 
 - To run client and server, we first start the server in a separate window:
   ![server](./assets/server.png)
@@ -71,7 +127,7 @@ Some examples of the client and server communication are documentated below:
 * Server:
   ![client](./assets/server_execution.png)
 
-To get rid of the server, we interrupt it on the command line for now. And, to get rid of the client you must write "exit".
+To get rid of the server, we interrupt it on the command line for now. And, to get rid of the client you must write **exit**.
 
 ## **Authors** ✒️
 

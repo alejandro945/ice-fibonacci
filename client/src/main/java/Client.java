@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
 
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.ObjectPrx;
@@ -30,8 +31,8 @@ public class Client {
      */
     public static void runProgram(CallbackSenderPrx server, CallbackReceiverPrx client) {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String hostname = communicator.getProperties().getProperty("Ice.Default.Host");
         try {
+            String hostname = InetAddress.getLocalHost().getHostName();
             System.out.print("Welcome please type a number 🫰: ");
             String message = br.readLine();
             while (!message.equalsIgnoreCase("exit")) {
