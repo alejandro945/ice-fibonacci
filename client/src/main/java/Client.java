@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
+import java.util.concurrent.TimeUnit;
 
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.ObjectPrx;
@@ -10,8 +11,13 @@ import Demo.CallbackReceiverPrx;
 import Demo.CallbackSenderPrx;
 
 public class Client {
+    // Communicator
     static com.zeroc.Ice.Communicator communicator;
 
+    /**
+     * Main method
+     * @param args 
+     */
     public static void main(String[] args) {
         java.util.List<String> extraArgs = new java.util.ArrayList<>();
         communicator = com.zeroc.Ice.Util.initialize(args, "config.client", extraArgs);
@@ -25,9 +31,9 @@ public class Client {
     }
 
     /**
-     * 
-     * @param server
-     * @param client
+     * Method responsible for running the program
+     * @param server 
+     * @param client 
      */
     public static void runProgram(CallbackSenderPrx server, CallbackReceiverPrx client) {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -36,7 +42,9 @@ public class Client {
             System.out.print("Welcome please type a number 🫰: ");
             String message = br.readLine();
             while (!message.equalsIgnoreCase("exit")) {
+                long startTime = System.nanoTime();
                 server.initiateCallback(client, hostname + ":" + message);
+                showTime(System.nanoTime() - startTime);
                 System.out.print("Enter another number to calculate ⭐️: ");
                 message =  br.readLine();
             }
@@ -46,9 +54,18 @@ public class Client {
     }
 
     /**
+     * Method responsible for showing time
+     * @param elapsed time
+     */
+    public static void showTime(long elapsed) {
+        long elapsedMillis = TimeUnit.MILLISECONDS.convert(elapsed, TimeUnit.NANOSECONDS);
+        long elapsedSecs = TimeUnit.SECONDS.convert(elapsed, TimeUnit.NANOSECONDS);
+        System.out.print("Time: " + (elapsedMillis) + " ms, " + (elapsedSecs) + " s");
+    }
+
+    /**
      * Method responsible for client callback creation
-     * 
-     * @return
+     * @return client callback
      */
     public static Demo.CallbackReceiverPrx clientConfiguration() {
         ObjectAdapter adapter = communicator.createObjectAdapter("Callback.Client");
@@ -60,8 +77,7 @@ public class Client {
 
     /**
      * Method responsible for server callback creation
-     * 
-     * @return
+     * @return server callback
      */
     public static Demo.CallbackSenderPrx serverConfiguration() {
         Demo.CallbackSenderPrx twoway = Demo.CallbackSenderPrx
