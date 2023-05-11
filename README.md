@@ -123,17 +123,41 @@ java -jar client/build/libs/client.jar
 
 Some examples of the client and server communication are documentated below:
 
-* Client:![client](./assets/client_execution.png)
+* Client:
+  ![client](./assets/client_execution.png)
 * Server:
-  ![client](./assets/server_execution.png)
+  ![server](./assets/server_execution.png)
 
 To get rid of the server, we interrupt it on the command line for now. And, to get rid of the client you must write **exit**.
 
+# Second part 📦
+
+## Part I: Implement bash or a simple scheme (e.g., writing to a file) that allows
+
+1. Determine the number of clients such that, when sending their messages at the same time to calculate the Fibonacci series of large numbers, the timeout exception begins to appear.
+
+2. Demonstrate how the server responds when many clients send messages at the same time with large integers (i.e., there is or is not concurrency).
+
+## Part II: Modify the server
+
+1. Multi-threaded so that it can respond to multiple requests from different clients, concurrently. Is this concurrency virtual or is it real? how can you prove it? Attach a screenshot of the test.
+
+2. Answer, with this new version, the two points of Part I.
+
+3. To allow a client to "register", with the hostname and what is necessary for them to make a callback.
+
+4. Regarding the messages, if the received message:
+    a. Starts with "list clients", it should return the list of clients (hostnames or their prefix) registered on the server.
+    b. Starts with "to X:", it should send the remainder of the message to X, where X is the destination hostname (or its prefix).
+    c. Starts with "BC" (broadcast), the message must be returned by the server to ALL clients registered with it.
+
+![distri](./assets/distributed.png)
 ## **Authors** ✒️
 
 <div align="left">
     <a href="https://github.com/cuatrosr" target="_blank"> <img alt="cuatrosr" src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/70908378?v=4&h=60&w=60&fit=cover&mask=circle"></a>
     <a href="https://github.com/alejandro945" target="_blank"> <img alt="alejandro945" src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/64285906?v=4&h=60&w=60&fit=cover&mask=circle"></a>
+    <a href="https://github.com/gabrielSB19" target="_blank"> <img alt="gabrielSB19" src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/64285906?v=4&h=60&w=60&fit=cover&mask=circle"></a>
 </div>
 
 ---

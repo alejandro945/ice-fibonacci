@@ -54,7 +54,9 @@ public class Task implements Runnable {
         String host = this.message.split(":", 2)[0]; // host: message
         String message = this.message.split(":", 2)[1].toLowerCase(); // host: message
         try {
-            if (message.startsWith("list clients")) { // list clients
+            if (message.startsWith("exit")) {
+                this.handler.removeClient(host);
+            } else if (message.startsWith("list clients")) { // list clients
                 replyHosts(getHosts());
             } else if (message.startsWith("bc")) { // bc message
                 emitBroadcast(host, message);
@@ -63,7 +65,7 @@ public class Task implements Runnable {
                 String msg = message.replace("to", "").trim().split(":", 2)[1];
                 send(host, to, msg);
             } else { // Fibonacci Calculation
-                this.proxy.callback(validationLayer(message));
+                this.proxy.callback(validationLayer(this.message));
             }
         } catch (InterruptedException e) {
             sem.release();
@@ -81,11 +83,11 @@ public class Task implements Runnable {
         String response = 0 + "";
         String print = message;
         try {
-            int number = Integer.parseInt(message.split(":", 2)[1]);
+            int number = Integer.parseInt(message.trim().split(":", 2)[1]);
             if (number > 0) {
-                List<Integer> seq = fibonacciSequence(number);
+                List<Integer> seq = this.fibonacciSequence(number);
                 print = message.split(":", 2)[0] + ":" + seq.toString();
-                response = (number != 1 && number != 2) ? fibonacciValue(seq) + "" : 1 + "";
+                response = (number != 1 && number != 2) ? this.fibonacciValue(seq) + "" : 1 + "";
             }
         } catch (Exception e) {}
         System.out.println(print);
@@ -135,7 +137,7 @@ public class Task implements Runnable {
      * @param hosts
      */
     public void replyHosts(ArrayList<String> hosts) {
-        String response = "Hosts:\n";
+        String response = "\n Hosts: \n";
         for (String host : hosts) {
             response += "\t" + host + "\n";
         }
@@ -173,6 +175,8 @@ public class Task implements Runnable {
         sem.acquire();
         if (this.handler.getClients().containsKey(to)) {
             this.handler.getClients().get(to).callback(from + ": " + message);
+        } else {
+            this.handler.getClients().get(from).callback("Host " + to + " not found");
         }
         sem.release();
     }

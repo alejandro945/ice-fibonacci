@@ -3,7 +3,7 @@
 # "hello" object in the server.
 #
 Printer.Proxy=SimplePrinter:tcp -p 9099
-Callback.Client.Endpoints=default -h 192.168.131.50
+Callback.Client.Endpoints=default -h 192.168.131.51
 #
 # Uncomment to use the WebSocket transports instead.
 #

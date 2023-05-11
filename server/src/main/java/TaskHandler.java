@@ -75,7 +75,7 @@ public class TaskHandler {
     /**
      * Method responsible for adding a client
      * 
-     * @param lambda (a) -> a.split(":", 2)[0] || null
+     * @param lambda  (a) -> a.split(":", 2)[0] || null
      * @param message
      * @param client
      */
@@ -87,9 +87,28 @@ public class TaskHandler {
                 this.clients.put(hostname, client);
                 System.out.println(hostname + " joined. \n"); // Debug Porpuses
             }
-            this.sem.release();
         } catch (InterruptedException e) {
             System.out.println("[ERROR]" + hostname + " failed to join. \n");
+            e.printStackTrace();
+        } finally {
+            this.sem.release();
+        }
+    }
+
+    /**
+     * Method responsible for removing a client
+     * 
+     * @param host
+     */
+    public void removeClient(String host) {
+        try {
+            this.sem.acquire();
+            if (this.clients.containsKey(host)) {
+                this.clients.remove(host);
+                System.out.println(host + " left. \n"); // Debug Porpuses
+            }
+        } catch (InterruptedException e) {
+            System.out.println("[ERROR]" + host + " failed to remove. \n");
             e.printStackTrace();
         } finally {
             this.sem.release();

@@ -39,15 +39,15 @@ public class Client {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
             String hostname = InetAddress.getLocalHost().getHostName();
-            System.out.print("Welcome please type a number 🫰: ");
+            System.out.println("Welcome please type a  \n 1. number [Fibonacci] \n 2. list clients [List of all host avaible] \n 3. bc <<msg>> or to <<host:msg>> [Send a particular msg] \n 4. exit ");
             String message = br.readLine();
             while (!message.equalsIgnoreCase("exit")) {
                 long startTime = System.nanoTime();
                 server.initiateCallback(client, hostname + ":" + message);
                 showTime(System.nanoTime() - startTime);
-                System.out.print("Enter another number to calculate ⭐️: ");
                 message =  br.readLine();
             }
+            server.initiateCallback(client, hostname + ":" + message); // exit
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -60,7 +60,7 @@ public class Client {
     public static void showTime(long elapsed) {
         long elapsedMillis = TimeUnit.MILLISECONDS.convert(elapsed, TimeUnit.NANOSECONDS);
         long elapsedSecs = TimeUnit.SECONDS.convert(elapsed, TimeUnit.NANOSECONDS);
-        System.out.print("Time: " + (elapsedMillis) + " ms, " + (elapsedSecs) + " s");
+        System.out.println("Time: " + (elapsedMillis) + " ms, " + (elapsedSecs) + " s");
     }
 
     /**
