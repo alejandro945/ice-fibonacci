@@ -156,7 +156,7 @@ To get rid of the server, we interrupt it on the command line for now. And, to g
 
 <div align="left">
     <a href="https://github.com/alejandro945" target="_blank"> <img alt="alejandro945" src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/64285906?v=4&h=60&w=60&fit=cover&mask=circle"></a>
-    <a href="https://github.com/gabrielSB19" target="_blank"> <img alt="gabrielSB19" src="https://avatars.githubusercontent.com/u/71047565?v=4"></a>
+    <a href="https://github.com/gabrielSB19" target="_blank"> <img alt="gabrielSB19" src="https://avatars.githubusercontent.com/u/71047565?v=4 " style="height: 60px; width: 60px; border-radius: 50%;"></a>
 </div>
 
 ---
