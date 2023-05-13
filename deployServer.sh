@@ -12,5 +12,10 @@ function kill_port_9099 {
     fi
 }
 
+echo "Matando proceso (Durara 3 segundos)"
+kill_port_9099
+sleep 3
+echo "Proceso matado"
+
 echo "Ejecutamos el server"
-sshpass -p swarch ssh -o StrictHostKeyChecking=no "${SERVER_ID}" "cd ${SERVER_PATH} && nohup java -jar server.jar > server.log 2>&1 &"
+java -jar server.jar >> server.log

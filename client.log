@@ -1,0 +1,18 @@
+7778742049
+Se calculo el fibonacci: hgrid4.icesi.edu.co: 49 con un Tiempo de respuesta: 102377 ms
+7778742049
+Se calculo el fibonacci: hgrid5.icesi.edu.co: 49 con un Tiempo de respuesta: 205624 ms
+null
+com.zeroc.Ice.ConnectionTimeoutException
+	at com.zeroc.IceInternal.OutgoingAsync.waitForResponseOrUserEx(OutgoingAsync.java:140)
+	at com.zeroc.IceInternal.OutgoingAsync.waitForResponse(OutgoingAsync.java:112)
+	at Demo.PrinterPrx.printAnswer(PrinterPrx.java:27)
+	at Demo.PrinterPrx.printAnswer(PrinterPrx.java:22)
+	at Client.main(Client.java:46)
+null
+com.zeroc.Ice.ConnectionTimeoutException
+	at com.zeroc.IceInternal.OutgoingAsync.waitForResponseOrUserEx(OutgoingAsync.java:140)
+	at com.zeroc.IceInternal.OutgoingAsync.waitForResponse(OutgoingAsync.java:112)
+	at Demo.PrinterPrx.printAnswer(PrinterPrx.java:27)
+	at Demo.PrinterPrx.printAnswer(PrinterPrx.java:22)
+	at Client.main(Client.java:46)
