@@ -45,6 +45,7 @@ public class Client {
                 long startTime = System.nanoTime();
                 server.initiateCallback(client, hostname + ":" + message);
                 showTime(System.nanoTime() - startTime);
+                System.out.println("Que deseas hacer ahora");
                 message =  br.readLine();
             }
             server.initiateCallback(client, hostname + ":" + message); // exit
