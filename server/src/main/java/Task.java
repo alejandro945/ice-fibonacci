@@ -80,6 +80,7 @@ public class Task implements Runnable {
      * @return response
      */
     public String validationLayer(String message) {
+        long start = System.currentTimeMillis();
         String response = 0 + "";
         String print = message;
         try {
@@ -90,8 +91,9 @@ public class Task implements Runnable {
                 response = (number != 1 && number != 2) ? this.fibonacciValue(seq) + "" : 1 + "";
             }
         } catch (Exception e) {}
+        long end = System.currentTimeMillis();
         System.out.println(print);
-        return response;
+        return response + "Response time:" + (end - start) + "ms for number" + message.trim().split(":", 2)[1];
     }
 
     /**
