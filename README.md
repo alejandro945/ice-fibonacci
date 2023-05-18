@@ -143,6 +143,7 @@ To get rid of the server, we interrupt it on the command line for now. And, to g
 ```bash
 sudo apt-get install sshpass
 ```
+
 If the execution environment is Windows, you must execute the .sh through the **Cygwin** terminal with the sshpass package installed or from a **WSL** execution environment with the sshpass package installed.
 
 1. Determine the number of clients such that, when sending their messages at the same time to calculate the Fibonacci series of large numbers, the timeout exception begins to appear.
@@ -150,17 +151,21 @@ If the execution environment is Windows, you must execute the .sh through the **
 2. Demonstrate how the server responds when many clients send messages at the same time with large integers (i.e., there is or is not concurrency).
 
 ### Building our project
+
 - To build our project, we must execute the following command:
+
 ```bash
 gradle build
 ```
 
 - Once the project is built, our project will already have the .Jar files ready to run the clients and the server. The first thing we must do is to execute the script that will send the .Jar files to the corresponding machines. For this, we must execute the following command:
+
 ```bash
 ./deploy.sh $1
 ```
 
 Where "$1" is a string containing the ids of the machines to which the .Jar will be sent (Clients). To send the script to several machines we must separate the ids by commas. For example, if we want to send the script to machines 4,5,6 and 7, we must execute the following command:
+
 ```bash
 ./deploy.sh 4,5,6,7
 ```
@@ -168,6 +173,7 @@ Where "$1" is a string containing the ids of the machines to which the .Jar will
 The .Jar from the server will always be sent to machine 2.
 
 - Run the server on machine 2. To do this, we must execute the following series of commands, from connecting remotely to machine 2, to running the server's .Jar:
+
 ```bash
 ssh swarch@xhgrid2
 cd GabrielSuarez-AlejandroVarela-CallBack
@@ -175,21 +181,25 @@ cd GabrielSuarez-AlejandroVarela-CallBack
 ```
 
 - To run the clients, the deployServer script must be running and the Server must be running. Server must be running. Once this is done, we can move on to running the clients. To run the clients, the following command must be executed:
+
 ```bash
 ./deployClient.sh $1 $2
 ```
 
 Where **$1** must be equal to the value that was passed in the deploy.sh and **$2** must be equal to the numbers with which you want to perform the fibonacci, like the clients, can be more than one number separated by commas, for example, if you want to run the fibonacci of the number 10 you must run the following command taking into account the clients mentioned above:
+
 ```bash
 ./deployClient 4,5,6,7 10
 ```
 
 - With this we will already have automated the execution of our system, to see the results of the server after the execution, you must go to the machine 2 and execute the following command:
+
 ```bash
 ssh swarch@xhgrid2
 cd GabrielSuarez-AlejandroVarela-CallBack
 cat server.log
 ```
+
 Now to see the result of the clients, we will only look at the **client.log** file that will be stored at the same level of the deploy .sh.
 
 **To see the analysis and the conclusion reached after automating the process go to the following <a href="./docs/Analisis del TimeOut - No concurrencia.pdf">link<a>**
@@ -208,6 +218,12 @@ Now to see the result of the clients, we will only look at the **client.log** fi
    c. Starts with "BC" (broadcast), the message must be returned by the server to ALL clients registered with it.
 
 ![distri](./assets/distributed.png)
+
+### Concurrency
+
+- This problem was resolve implementing a CallBack, this CallBack has a real concurrency, to see more information about this.
+
+**To see the analysis and the conclusion reached after automating the process go to the following <a href="./docs/Analisis del TimeOut - Concurrencia.pdf">link<a>**
 
 ## **Authors** ✒️
 
