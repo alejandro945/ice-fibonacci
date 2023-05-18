@@ -84,16 +84,16 @@ public class Task implements Runnable {
         String response = 0 + "";
         String print = message;
         try {
-            int number = Integer.parseInt(message.trim().split(":", 2)[1]);
+            long number = Long.parseLong(message.trim().split(":", 2)[1]);
             if (number > 0) {
-                List<Integer> seq = this.fibonacciSequence(number);
+                List<Long> seq = this.fibonacciSequence(number);
                 print = message.split(":", 2)[0] + ":" + seq.toString();
                 response = (number != 1 && number != 2) ? this.fibonacciValue(seq) + "" : 1 + "";
             }
         } catch (Exception e) {}
         long end = System.currentTimeMillis();
         System.out.println(print);
-        return response + "Response time:" + (end - start) + "ms for number" + message.trim().split(":", 2)[1];
+        return response + " Response time: " + (end - start) + " ms for number " + message.trim().split(":", 2)[1] + "\n Realiza otra funcion";
     }
 
     /**
@@ -102,8 +102,8 @@ public class Task implements Runnable {
      * @param number
      * @return fibonacci sequence
      */
-    public List<Integer> fibonacciSequence(int number) {
-        return Stream.iterate(new int[] { 1, 1 }, t -> new int[] { t[1], t[0] + t[1] }).limit(number).map(n -> n[0])
+    public List<Long> fibonacciSequence(long number) {
+        return Stream.iterate(new long[] { 1, 1 }, t -> new long[] { t[1], t[0] + t[1] }).limit(number).map(n -> n[0])
                 .collect(Collectors.toList());
     }
 
@@ -113,8 +113,8 @@ public class Task implements Runnable {
      * @param seq
      * @return fibonacci value
      */
-    public int fibonacciValue(List<Integer> seq) {
-        return seq.subList(seq.size() - 2, seq.size()).stream().mapToInt(Integer::intValue).sum();
+    public long fibonacciValue(List<Long> seq) {
+        return seq.subList(seq.size() - 2, seq.size()).stream().mapToLong(Long::longValue).sum();
     }
 
     /**

@@ -42,10 +42,7 @@ public class Client {
             System.out.println("Welcome please type a  \n 1. number [Fibonacci] \n 2. list clients [List of all host avaible] \n 3. bc <<msg>> or to <<host:msg>> [Send a particular msg] \n 4. exit ");
             String message = br.readLine();
             while (!message.equalsIgnoreCase("exit")) {
-                long startTime = System.nanoTime();
                 server.initiateCallback(client, hostname + ":" + message);
-                showTime(System.nanoTime() - startTime);
-                System.out.println("Que deseas hacer ahora");
                 message =  br.readLine();
             }
             server.initiateCallback(client, hostname + ":" + message); // exit
