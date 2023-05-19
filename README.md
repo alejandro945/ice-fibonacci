@@ -199,7 +199,6 @@ cat server.log
 
 Now to see the result of the clients, we will only look at the **client.log** file that will be stored at the same level of the deploy .sh.
 
-**To see the analysis and the conclusion reached after automating the process go to the following <a href="./docs/Analisis del TimeOut - No concurrencia.pdf">link<a>**
 
 ## Part II: Modify the server
 
