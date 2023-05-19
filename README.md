@@ -148,13 +148,18 @@ sudo apt-get install sshpass
 If the execution environment is Windows, you must execute the .sh through the **Cygwin** terminal with the sshpass package installed or from a **WSL** execution environment with the sshpass package installed.
 
 ### Building our project
+
 - To build our project, we must execute the following command:
 
 ```bash
 gradle build
 ```
 
+<<<<<<< HEAD
 - Once the project is built, our project will already have the .Jar files ready to run the clients and the server on remote pc's. The first thing we must do is to execute the script that will send the .Jar files to the corresponding machines. For this, we must execute the following command:
+=======
+- Once the project is built, our project will already have the .Jar files ready to run the clients and the server. The first thing we must do is to execute the script that will send the .Jar files to the corresponding machines. For this, we must execute the following command:
+>>>>>>> 67eb562b75bfee97361a6cd6cc18ee57a0ed7037
 
 ```bash
 ./deploy.sh $1
@@ -176,7 +181,11 @@ cd GabrielSuarez-AlejandroVarela-CallBack
 ./deployServer.sh
 ```
 
+<<<<<<< HEAD
 - To run the clients, the deployServer script must be running so the Server too. Server must be running. Once this is done, we can move on to running the clients. To run the clients, the following command must be executed:
+=======
+- To run the clients, the deployServer script must be running and the Server must be running. Server must be running. Once this is done, we can move on to running the clients. To run the clients, the following command must be executed:
+>>>>>>> 67eb562b75bfee97361a6cd6cc18ee57a0ed7037
 
 ```bash
 ./deployClient.sh $1 $2
@@ -228,6 +237,12 @@ We test up to 10 * 10^8 and get a result or timeout of 9 seconds in that order o
    c. Starts with "BC" (broadcast), the message must be returned by the server to ALL clients registered with it.
 
 ![distri](./assets/menu.png)
+
+### Concurrency
+
+- This problem was resolve implementing a CallBack, this CallBack has a real concurrency, to see more information about this.
+
+**To see the analysis and the conclusion reached after automating the process go to the following <a href="./docs/Analisis del TimeOut - Concurrencia.pdf">link<a>**
 
 ## **Authors** ✒️
 
