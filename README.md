@@ -236,7 +236,8 @@ We test up to 10 * 10^8 and get a result or timeout of 9 seconds in that order o
  if (message.startsWith("exit")) {
      this.handler.removeClient(host);
  } else if (message.startsWith("list clients")) { // list clients
-     replyHosts(getHosts());  } else if (message.startsWith("bc")) { // bc message
+     replyHosts(getHosts());  
+ } else if (message.startsWith("bc")) { // bc message
      emitBroadcast(host, message);
  } else if (message.startsWith("to")) { // to host:message
      String to = message.replace("to", "").trim().split(":", 2)[0];
