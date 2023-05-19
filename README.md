@@ -128,7 +128,7 @@ Some examples of the client and server communication are documentated below:
 
 - Client:
   ![client](./assets/client_execution.png)
-- Server:
+- Server: </br>
   ![server](./assets/server_execution.png)
 
 To get rid of the server, we interrupt it on the command line for now. And, to get rid of the client you must write **exit**.
@@ -155,11 +155,7 @@ If the execution environment is Windows, you must execute the .sh through the **
 gradle build
 ```
 
-<<<<<<< HEAD
 - Once the project is built, our project will already have the .Jar files ready to run the clients and the server on remote pc's. The first thing we must do is to execute the script that will send the .Jar files to the corresponding machines. For this, we must execute the following command:
-=======
-- Once the project is built, our project will already have the .Jar files ready to run the clients and the server. The first thing we must do is to execute the script that will send the .Jar files to the corresponding machines. For this, we must execute the following command:
->>>>>>> 67eb562b75bfee97361a6cd6cc18ee57a0ed7037
 
 ```bash
 ./deploy.sh $1
@@ -181,11 +177,7 @@ cd GabrielSuarez-AlejandroVarela-CallBack
 ./deployServer.sh
 ```
 
-<<<<<<< HEAD
 - To run the clients, the deployServer script must be running so the Server too. Server must be running. Once this is done, we can move on to running the clients. To run the clients, the following command must be executed:
-=======
-- To run the clients, the deployServer script must be running and the Server must be running. Server must be running. Once this is done, we can move on to running the clients. To run the clients, the following command must be executed:
->>>>>>> 67eb562b75bfee97361a6cd6cc18ee57a0ed7037
 
 ```bash
 ./deployClient.sh $1 $2
