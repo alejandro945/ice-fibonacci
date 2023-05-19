@@ -139,6 +139,8 @@ To get rid of the server, we interrupt it on the command line for now. And, to g
 
 **The implementation of part I will be in the callback-part-I branch, to go to this branch do clcik <a href="https://github.com/alejandro945/ice-fibonacci/tree/callback-part-I">hear</a>**
 
+**To see the analysis and the conclusion reached after automating the process go to the following <a href="./docs/Analisis del TimeOut - No concurrencia.pdf">link<a>**
+
 **Important remark:** In order to run the bash scripts, you must have the bash package installed. **sshpass**. If you are on a Linux operating system, run:
 
 ```bash
@@ -201,8 +203,6 @@ Now to see the result of the clients, we will only look at the **client.log** fi
 
 
 ## Part II: Modify the server
-
-**To see the analysis and the conclusion reached after automating the process go to the following <a href="./docs/Analisis del TimeOut - Concurrencia.pdf">link<a>**
 
 1. Multi-threaded so that it can respond to multiple requests from different clients, concurrently. Is this concurrency virtual or is it real? how can you prove it? Attach a screenshot of the test.
 
