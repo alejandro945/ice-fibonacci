@@ -220,14 +220,33 @@ We test up to 10 * 10^8 and get a result or timeout of 9 seconds in that order o
 
 3. To allow a client to "register", with the hostname and what is necessary for them to make a callback.
 
-![register](./assets/register.png)
+```java
+    if (!this.clients.containsKey(hostname)) {
+       this.clients.put(hostname, client);
+       System.out.println(hostname + " joined. \n"); // Debug Porpouses
+    }
+```
 
 4. Regarding the messages, if the received message:
    a. Starts with "list clients", it should return the list of clients (hostnames or their prefix) registered on the server.
    b. Starts with "to X:", it should send the remainder of the message to X, where X is the destination hostname (or its prefix).
    c. Starts with "BC" (broadcast), the message must be returned by the server to ALL clients registered with it.
 
-![distri](./assets/menu.png)
+```java
+            if (message.startsWith("exit")) {
+                this.handler.removeClient(host);
+            } else if (message.startsWith("list clients")) { // list clients
+                replyHosts(getHosts());
+            } else if (message.startsWith("bc")) { // bc message
+                emitBroadcast(host, message);
+            } else if (message.startsWith("to")) { // to host:message
+                String to = message.replace("to", "").trim().split(":", 2)[0];
+                String msg = message.replace("to", "").trim().split(":", 2)[1];
+                send(host, to, msg);
+            } else { // Fibonacci Calculation
+                this.proxy.callback(validationLayer(this.message));
+            } 
+```
 
 ### Concurrency
 
